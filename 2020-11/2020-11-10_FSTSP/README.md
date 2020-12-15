@@ -1,6 +1,12 @@
 @[TOC] 
 # 运小筹(2020-11-10)： 无人机与卡车联合配送-论文代码复现
 
+
+作者：刘兴禄，清华大学，清华伯克利深圳学院 (博士在读)
+
+邮箱：hsinglul@163.com
+
+
 > 原博客链接 [https://blog.csdn.net/HsinglukLiu/article/details/107871295](https://blog.csdn.net/HsinglukLiu/article/details/107871295)
 
 ## Introduction
