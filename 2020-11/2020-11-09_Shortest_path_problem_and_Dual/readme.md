@@ -1,39 +1,45 @@
-# ÔËĞ¡³ï(2020-11-9): Shortest Path Problem¼°Æä¶ÔÅ¼ÎÊÌâµÄÒ»Ğ©Ì½ÌÖ(¸½Pythonµ÷ÓÃGurobiÊµÏÖ)
+# è¿å°ç­¹(2020-11-9): Shortest Path ProblemåŠå…¶å¯¹å¶é—®é¢˜çš„ä¸€äº›æ¢è®¨(é™„Pythonè°ƒç”¨Gurobiå®ç°)
 
-@[TOC] 
-# Shortest Path Problem¼°Æä¶ÔÅ¼ÎÊÌâµÄÒ»Ğ©Ì½ÌÖ(¸½Pythonµ÷ÓÃGurobiÊµÏÖ)
+**å…³æ³¨æˆ‘ä»¬:  è¿ç­¹å°å…¬ä¼—å·**
 
-×÷Õß£ºÁõĞËÂ»£¬Çå»ª´óÑ§£¬Çå»ª²®¿ËÀûÉîÛÚÑ§Ôº (²©Ê¿ÔÚ¶Á)
 
-ÓÊÏä£ºhsinglul@163.com
 
-> Ô­²©¿ÍÁ´½Ó [https://blog.csdn.net/HsinglukLiu/article/details/107834197](https://blog.csdn.net/HsinglukLiu/article/details/107834197)
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201214000806951.png)
+
+
+# Shortest Path ProblemåŠå…¶å¯¹å¶é—®é¢˜çš„ä¸€äº›æ¢è®¨(é™„Pythonè°ƒç”¨Gurobiå®ç°)
+
+ä½œè€…ï¼šåˆ˜å…´ç¦„ï¼Œæ¸…åå¤§å­¦ï¼Œæ¸…åä¼¯å…‹åˆ©æ·±åœ³å­¦é™¢ (åšå£«åœ¨è¯»)
+
+é‚®ç®±ï¼šhsinglul@163.com
+
+> åŸåšå®¢é“¾æ¥ [https://blog.csdn.net/HsinglukLiu/article/details/107834197](https://blog.csdn.net/HsinglukLiu/article/details/107834197)
 
 ## Introduction
 
-> ±¾´úÂëÖ÷ÒªÊÇÑéÖ¤Shortest path problemÒÔ¼°Æä¶ÔÅ¼ÎÊÌâ
+> æœ¬ä»£ç ä¸»è¦æ˜¯éªŒè¯Shortest path problemä»¥åŠå…¶å¯¹å¶é—®é¢˜
 
 
-ÎÄÖĞµÄÀı×ÓÍøÂç
+æ–‡ä¸­çš„ä¾‹å­ç½‘ç»œ
 
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215170957756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215170957756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
 ## Model
-### Shortest path problemÄ£ĞÍ£¨Ä£ĞÍ1£©
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215171154429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+### Shortest path problemæ¨¡å‹ï¼ˆæ¨¡å‹1ï¼‰
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215171154429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
-### Shortest path problem±ê×¼Ä£ĞÍ£¨Ä£ĞÍ2£©
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215171236444.png)
+### Shortest path problemæ ‡å‡†æ¨¡å‹ï¼ˆæ¨¡å‹2ï¼‰
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215171236444.png)
 
-### Shortest path problemµÄ¶ÔÅ¼ÎÊÌâ£¨Ä£ĞÍ3£©
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215171923187.png)
+### Shortest path problemçš„å¯¹å¶é—®é¢˜ï¼ˆæ¨¡å‹3ï¼‰
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215171923187.png)
 
 
 ## Quick start 
 
- - `SPP_Gurobi.py`:ÊÇPythonµ÷ÓÃGurobiÇó½âÄ£ĞÍ1ĞÎÊ½µÄ´úÂë
- - `SPP_Standard_form_Gurobi.py`£ºÊÇPythonµ÷ÓÃGurobiÇó½âÄ£ĞÍ2ĞÎÊ½µÄ´úÂë
- - `SPP_Dual.py`£ºÊÇPythonµ÷ÓÃGurobiÇó½âÄ£ĞÍ3ĞÎÊ½µÄ´úÂë
+ - `SPP_Gurobi.py`:æ˜¯Pythonè°ƒç”¨Gurobiæ±‚è§£æ¨¡å‹1å½¢å¼çš„ä»£ç 
+ - `SPP_Standard_form_Gurobi.py`ï¼šæ˜¯Pythonè°ƒç”¨Gurobiæ±‚è§£æ¨¡å‹2å½¢å¼çš„ä»£ç 
+ - `SPP_Dual.py`ï¼šæ˜¯Pythonè°ƒç”¨Gurobiæ±‚è§£æ¨¡å‹3å½¢å¼çš„ä»£ç 
 
 
 ## Dependencies
@@ -45,7 +51,7 @@
 
 ## Dataset Format
 Solomon VRP benchmark instance
-ÏÂÔØµØÖ·[https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/)
+ä¸‹è½½åœ°å€[https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/)
 
 ```python
 Nodes = ['s', 'a', 'b', 'c', 't'] 
@@ -64,14 +70,17 @@ Arcs
 
 
 ## Contact
-Your Name £ºÁõĞËÂ»   hsinglul@163.com
+Your Name ï¼šåˆ˜å…´ç¦„   hsinglul@163.com
 
 My blog:   [https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113](https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113)
 
 
 ## About us
-ÔËĞ¡³ï¹«ÖÚºÅÊÇÖÂÁ¦ÓÚ·ÖÏíÔË³ïÓÅ»¯(LP¡¢MIP¡¢NLP¡¢Ëæ»ú¹æ»®¡¢Â³°ôÓÅ»¯)¡¢Í¹ÓÅ»¯¡¢Ç¿»¯Ñ§Ï°µÈÑĞ¾¿ÁìÓòµÄÄÚÈİÒÔ¼°Éæ¼°µ½µÄËã·¨µÄ´úÂëÊµÏÖ¡£±à³ÌÓïÑÔºÍ¹¤¾ß°üÀ¨Java¡¢Python¡¢Matlab¡¢CPLEX¡¢Gurobi¡¢SCIP µÈ¡£
+è¿å°ç­¹å…¬ä¼—å·æ˜¯è‡´åŠ›äºåˆ†äº«è¿ç­¹ä¼˜åŒ–(LPã€MIPã€NLPã€éšæœºè§„åˆ’ã€é²æ£’ä¼˜åŒ–)ã€å‡¸ä¼˜åŒ–ã€å¼ºåŒ–å­¦ä¹ ç­‰ç ”ç©¶é¢†åŸŸçš„å†…å®¹ä»¥åŠæ¶‰åŠåˆ°çš„ç®—æ³•çš„ä»£ç å®ç°ã€‚ç¼–ç¨‹è¯­è¨€å’Œå·¥å…·åŒ…æ‹¬Javaã€Pythonã€Matlabã€CPLEXã€Gurobiã€SCIP ç­‰ã€‚
 
 
-**¹Ø×¢ÎÒÃÇ:  ÔË³ïĞ¡¹«ÖÚºÅ**
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201214000806951.png)
+**å…³æ³¨æˆ‘ä»¬:  è¿ç­¹å°å…¬ä¼—å·**
+
+
+
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201214000806951.png)
