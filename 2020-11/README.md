@@ -2,11 +2,11 @@
 
 ## 目录：
 
-- 11-5 ： Python+networkX+OpenStreetMap实现交通数据可视化
+- 11-5 ： Python+networkX+OpenStreetMap实现交通数据可视化 （见运小筹公众号）
 
 - 11-6 ： 优化|最速下降法：详细案例+Python实现
 
-- 11-8 : 可视化|Python+OpenStreetMap的交通数据可视化(二)：OpenStreetMap+Python画城市交通路网图
+- 11-8 : 可视化|Python+OpenStreetMap的交通数据可视化(二)：OpenStreetMap+Python画城市交通路网图（见运小筹公众号）
 
 - 11-9 : 优化|Shortest Path Problem及其对偶问题的一些探讨(附Python调用Gurobi实现)
 
