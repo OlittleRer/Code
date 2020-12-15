@@ -1,47 +1,52 @@
-# ÔËĞ¡³ï(2020-11-16): TSP callback README
+# è¿å°ç­¹(2020-11-16): TSP callback README
 
 @[TOC] 
-# TSPÖĞÁ½ÖÖ²»Í¬Ïû³ı×Ó»·Â·µÄ·½·¨¼°callbackÊµÏÖ£¨Pythonµ÷ÓÃGurobiÇó½â£©
+# TSPä¸­ä¸¤ç§ä¸åŒæ¶ˆé™¤å­ç¯è·¯çš„æ–¹æ³•åŠcallbackå®ç°ï¼ˆPythonè°ƒç”¨Gurobiæ±‚è§£ï¼‰
 
-> Ô­²©¿ÍÁ´½Ó [https://blog.csdn.net/HsinglukLiu/article/details/107871295](https://blog.csdn.net/HsinglukLiu/article/details/107871295)
+ä½œè€…ï¼šåˆ˜å…´ç¦„ï¼Œæ¸…åå¤§å­¦ï¼Œæ¸…åä¼¯å…‹åˆ©æ·±åœ³å­¦é™¢ (åšå£«åœ¨è¯») 
+
+é‚®ç®±ï¼šhsinglul@163.com
+
+
+> åŸåšå®¢é“¾æ¥ [https://blog.csdn.net/HsinglukLiu/article/details/107871295](https://blog.csdn.net/HsinglukLiu/article/details/107871295)
 
 ## Introduction
 
-> ±¾´úÂëÖ÷ÒªÊÇÊµÏÖTSPµÄÁ½ÖÖ×Ó»·Â·µÄÏû³ı·½·¨¼°Æä´úÂëÊµÏÖ¡£
+> æœ¬ä»£ç ä¸»è¦æ˜¯å®ç°TSPçš„ä¸¤ç§å­ç¯è·¯çš„æ¶ˆé™¤æ–¹æ³•åŠå…¶ä»£ç å®ç°ã€‚
 
-´úÂëÇó½â½á¹û¿ÉÊÓ»¯Ğ§¹ûÈçÍ¼
+ä»£ç æ±‚è§£ç»“æœå¯è§†åŒ–æ•ˆæœå¦‚å›¾
 
-> ÀıÈç£º
-> ![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20200806202054628.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
-Í¼Æ¬À´×Ô£º[http://algorist.com/problems/Traveling_Salesman_Problem.html](http://algorist.com/problems/Traveling_Salesman_Problem.html)
+> ä¾‹å¦‚ï¼š
+> ![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20200806202054628.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
+å›¾ç‰‡æ¥è‡ªï¼š[http://algorist.com/problems/Traveling_Salesman_Problem.html](http://algorist.com/problems/Traveling_Salesman_Problem.html)
 
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20200806202603742.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
-Í¼Æ¬À´×Ô[http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm](http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm)
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20200806202603742.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
+å›¾ç‰‡æ¥è‡ª[http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm](http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm)
 
 
 
 ## Model
-### µÚÒ»ÖÖÏû³ı×Ó»·Â·Ô¼ÊøµÄ·½·¨£ºsubtour-elimination constraints
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215161759867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
-### µÚ2ÖÖÏû³ı×Ó»·Â·Ô¼ÊøµÄ·½·¨£ºMTZ formulation
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215161922624.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+### ç¬¬ä¸€ç§æ¶ˆé™¤å­ç¯è·¯çº¦æŸçš„æ–¹æ³•ï¼šsubtour-elimination constraints
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215161759867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+### ç¬¬2ç§æ¶ˆé™¤å­ç¯è·¯çº¦æŸçš„æ–¹æ³•ï¼šMTZ formulation
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215161922624.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
 
 ## Quick start 
 
- - `readData(path, nodeNum)`:¶ÁÈ¡.txtÎÄµµÖĞµÄËãÀıÊı¾İ;
- - `reportMIP(model, Routes)`£º»ñµÃ²¢´òÓ¡×îÓÅ½âĞÅÏ¢;
- - `getValue(var_dict, nodeNum)`:»ñµÃ¾ö²ß±äÁ¿µÄÖµ£¬²¢´æ´¢·µ»ØÒ»¸ö`np.array()`Êı×é;
- - `getRoute(x_value)`:¸ù¾İ½â`x_value`µÃµ½¸Ã½â¶ÔÓ¦µÄÂ·¾¶¡£
+ - `readData(path, nodeNum)`:è¯»å–.txtæ–‡æ¡£ä¸­çš„ç®—ä¾‹æ•°æ®;
+ - `reportMIP(model, Routes)`ï¼šè·å¾—å¹¶æ‰“å°æœ€ä¼˜è§£ä¿¡æ¯;
+ - `getValue(var_dict, nodeNum)`:è·å¾—å†³ç­–å˜é‡çš„å€¼ï¼Œå¹¶å­˜å‚¨è¿”å›ä¸€ä¸ª`np.array()`æ•°ç»„;
+ - `getRoute(x_value)`:æ ¹æ®è§£`x_value`å¾—åˆ°è¯¥è§£å¯¹åº”çš„è·¯å¾„ã€‚
 
-È»ºó¶¨Òå¼¸¸ö·Ç³£¹Ø¼üµÄ`ÓÃÓÚÌí¼Ósubtour-elimination`Ô¼ÊøµÄº¯Êı£º
+ç„¶åå®šä¹‰å‡ ä¸ªéå¸¸å…³é”®çš„`ç”¨äºæ·»åŠ subtour-elimination`çº¦æŸçš„å‡½æ•°ï¼š
 
- - `subtourelim(model, where)`: callbackº¯Êı£¬ÓÃÓÚÎª`model`¶ÔÏó¶¯Ì¬Ìí¼Ó`subtour-elimination`Ô¼Êø£»
- - `computeDegree(graph)`: ¸ø¶¨Ò»¸ögraph(¶şÎ¬Êı×éĞÎÊ½)£¬Ò²¾ÍÊÇ¸ø¶¨Ò»¸ö`ÁÚ½Ó¾ØÕó`£¬¼ÆËã³öÃ¿¸ö½áµãµÄ`degree`.(degree=Ã¿¸ö½áµã±»½øÈë´ÎÊı+±»Àë¿ªµÄ´ÎÊı)£»
- - `findEdges(graph)`: ¸ø¶¨Ò»¸ögraph(¶şÎ¬Êı×éĞÎÊ½)£¬Ò²¾ÍÊÇ¸ø¶¨Ò»¸ö`ÁÚ½Ó¾ØÕó`£¬ÕÒµ½¸ÃÍ¼ÖĞËùÓĞµÄ`±ß`£¬ÀıÈç[(1, 2), (2, 4), (2, 5)]£»
- - `subtour(graph)`:¸ø¶¨Ò»¸ögraph(¶şÎ¬Êı×éĞÎÊ½)£¬Ò²¾ÍÊÇ¸ø¶¨Ò»¸ö`ÁÚ½Ó¾ØÕó`£¬ÕÒµ½¸ÃÍ¼ÖĞ°üº¬½áµãÊıÄ¿×îÉÙµÄ`×Ó»·Â·`£¬ÀıÈç[2, 3, 5]¡£
+ - `subtourelim(model, where)`: callbackå‡½æ•°ï¼Œç”¨äºä¸º`model`å¯¹è±¡åŠ¨æ€æ·»åŠ `subtour-elimination`çº¦æŸï¼›
+ - `computeDegree(graph)`: ç»™å®šä¸€ä¸ªgraph(äºŒç»´æ•°ç»„å½¢å¼)ï¼Œä¹Ÿå°±æ˜¯ç»™å®šä¸€ä¸ª`é‚»æ¥çŸ©é˜µ`ï¼Œè®¡ç®—å‡ºæ¯ä¸ªç»“ç‚¹çš„`degree`.(degree=æ¯ä¸ªç»“ç‚¹è¢«è¿›å…¥æ¬¡æ•°+è¢«ç¦»å¼€çš„æ¬¡æ•°)ï¼›
+ - `findEdges(graph)`: ç»™å®šä¸€ä¸ªgraph(äºŒç»´æ•°ç»„å½¢å¼)ï¼Œä¹Ÿå°±æ˜¯ç»™å®šä¸€ä¸ª`é‚»æ¥çŸ©é˜µ`ï¼Œæ‰¾åˆ°è¯¥å›¾ä¸­æ‰€æœ‰çš„`è¾¹`ï¼Œä¾‹å¦‚[(1, 2), (2, 4), (2, 5)]ï¼›
+ - `subtour(graph)`:ç»™å®šä¸€ä¸ªgraph(äºŒç»´æ•°ç»„å½¢å¼)ï¼Œä¹Ÿå°±æ˜¯ç»™å®šä¸€ä¸ª`é‚»æ¥çŸ©é˜µ`ï¼Œæ‰¾åˆ°è¯¥å›¾ä¸­åŒ…å«ç»“ç‚¹æ•°ç›®æœ€å°‘çš„`å­ç¯è·¯`ï¼Œä¾‹å¦‚[2, 3, 5]ã€‚
 
-ÆäÖĞ£¬º¯Êı`subtourelim(model, where)`ÖĞ£¬µ÷ÓÃÁËº¯Êı`computeDegree(graph)`¡¢`findEdges(graph)`ºÍ`subtour(graph)`¡£
+å…¶ä¸­ï¼Œå‡½æ•°`subtourelim(model, where)`ä¸­ï¼Œè°ƒç”¨äº†å‡½æ•°`computeDegree(graph)`ã€`findEdges(graph)`å’Œ`subtour(graph)`ã€‚
 
 
 ## Dependencies
@@ -58,7 +63,7 @@
 
 ## Dataset Format
 Solomon VRP benchmark instance
-ÏÂÔØµØÖ·[https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/)
+ä¸‹è½½åœ°å€[https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/100-customers/)
 
 ```python
 C101
@@ -175,24 +180,24 @@ CUST NO.  XCOORD.   YCOORD.    DEMAND   READY TIME  DUE DATE   SERVICE   TIME
 ```
 
 
-solomonÏà¹ØÊı¾İ¼¯¡¢×îÓÅ½âµÈÏêÏ¸ĞÅÏ¢¼û¹ÙÍø£º[solomon benchmark](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/)
+solomonç›¸å…³æ•°æ®é›†ã€æœ€ä¼˜è§£ç­‰è¯¦ç»†ä¿¡æ¯è§å®˜ç½‘ï¼š[solomon benchmark](https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/)
 
 
 
 ## Contact
-Your Name £º  hsinglul@163.com
+Your Name ï¼š  hsinglul@163.com
 
 My blog:   [https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113](https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113)
 
 
 ## About us
-ÔËĞ¡³ï¹«ÖÚºÅÊÇÖÂÁ¦ÓÚ·ÖÏíÔË³ïÓÅ»¯(LP¡¢MIP¡¢NLP¡¢Ëæ»ú¹æ»®¡¢Â³°ôÓÅ»¯)¡¢Í¹ÓÅ»¯¡¢Ç¿»¯Ñ§Ï°µÈÑĞ¾¿ÁìÓòµÄÄÚÈİÒÔ¼°Éæ¼°µ½µÄËã·¨µÄ´úÂëÊµÏÖ¡£±à³ÌÓïÑÔºÍ¹¤¾ß°üÀ¨Java¡¢Python¡¢Matlab¡¢CPLEX¡¢Gurobi¡¢SCIP µÈ¡£
+è¿å°ç­¹å…¬ä¼—å·æ˜¯è‡´åŠ›äºåˆ†äº«è¿ç­¹ä¼˜åŒ–(LPã€MIPã€NLPã€éšæœºè§„åˆ’ã€é²æ£’ä¼˜åŒ–)ã€å‡¸ä¼˜åŒ–ã€å¼ºåŒ–å­¦ä¹ ç­‰ç ”ç©¶é¢†åŸŸçš„å†…å®¹ä»¥åŠæ¶‰åŠåˆ°çš„ç®—æ³•çš„ä»£ç å®ç°ã€‚ç¼–ç¨‹è¯­è¨€å’Œå·¥å…·åŒ…æ‹¬Javaã€Pythonã€Matlabã€CPLEXã€Gurobiã€SCIP ç­‰ã€‚
 
 
-**¹Ø×¢ÎÒÃÇ:  ÔË³ïĞ¡¹«ÖÚºÅ**
+**å…³æ³¨æˆ‘ä»¬:  è¿ç­¹å°å…¬ä¼—å·**
 
 
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201214000806951.png)
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201214000806951.png)
 
 
 
