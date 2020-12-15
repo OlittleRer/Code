@@ -14,84 +14,9 @@
 
 
 ## Model
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201215152748669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201215152805509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
-> 
-> $$\begin{aligned}
-\min & \quad t_{c+1}  
-\\
-\text { s.t. } & \sum_{i \in N_{0} \atop i \neq j} x_{i j}+\sum_{i \in N_{0}} \sum_{k \in N_{+} \atop i \neq j} y_{i j k}=1,   \quad \forall j \in C
-\\
-&\sum_{j \in N_{+}} x_{0 j}=1,   
-\\ 
-&\sum_{i \in N_{0}} x_{i, c+1}=1 ,  
-\\ 
-&u_{i}-u_{j}+1 \leq (c+2)\left(1-x_{i j}\right),   \quad \forall i \in C, j \in\left\{N_{+}: j \neq i\right\} 
-\\ 
-&\sum_{i \in N_{0}} x_{i j}=\sum_{k \in N_{+} \atop i \neq j} x_{j k},   \quad \forall j \in C
-\\
-&\sum_{j \in C} \sum_{k \in N_{t} \atop j \neq i(j, j) \in P} y_{i j k} \leq 1,   \quad \forall i \in N_{0}
-\\
-&\sum_{i \in N_{0} \atop i \neq k} \sum_{j \in C \atop i \neq i, j, k\rangle \in P} y_{i j k} \leq 1,   \quad \forall k \in N_{+}
-\\
-&2 y_{i j k} \leq \sum_{h \in N_{0} \atop h \neq i} x_{h i}+\sum_{l \in C \atop l \neq k} x_{l k},   \quad 
-\\
-& \hspace{2cm} \forall i \in C, j \in\{C: j \neq i\}, k \in\left\{N_{+}:\langle i, j, k\rangle \in P\right\}
-\\
-&y_{0 j k} \leq \sum_{h \in N_{0} \atop h \neq k} x_{h k},   \quad \forall j \in C, k \in\left\{N_{+}:\langle 0, j, k\rangle \in P\right\}
-\\
-&u_{k}-u_{i} \geq 1-(c+2)\left(1-\sum_{j \in C} y_{i j k}\right),   \quad     
-\\
-&\hspace{2cm}\forall i \in C, k \in\left\{N_{+}: k \neq i\right\} 
-\\ 
-&t_{i}^{\prime} \geq t_{i}-M\left(1-\sum_{j \in C} \sum_{k \in N_{+} \atop j \neq i} y_{i j k}\right),   \quad \forall i \in C
-\\
-&t_{i}^{\prime} \leq t_{i}+M\left(1-\sum_{j \in C \atop j \neq i} \sum_{k \in N_{+} \atop\langle i, j\rangle \in P} y_{i j k}\right),   \quad \forall i \in C
-\\
-&t_{k}^{\prime} \geq t_{k}-M\left(1-\sum_{i \in N_{0}} \sum_{j \in C \atop i \neq k} y_{i j k}\right),   \quad \forall k \in N_{+}
-\\
-&t_{k}^{\prime} \leq t_{k}+M\left(1-\sum_{i \in N_{0} \atop i \neq k(i j, k) \in P} y_{i j k}\right),   \quad \forall k \in N_{+}
-\\
-&t_{k} \geq t_{h}+\tau_{h k}+s_{L}\left(\sum_{l \in C} \sum_{m \in N_{+} \atop l \neq k} y_{k l m}\right)+s_{R}\left(\sum_{i \in N_{0}} \sum_{j \in C} y_{i j k}\right)-M\left(1-x_{h k}\right),    
-\\
-&\hspace{2cm}\forall h \in N_{0}, k \in\left\{N_{+}: k \neq h\right\}
-\\
-&t_{j}^{\prime} \geq t_{i}^{\prime}+\tau_{i j}^{\prime}-M\left(1-\sum_{k \in N_{+} \atop\langle i, j, k) \in P} y_{i j k}\right) \quad \forall j \in C^{\prime}, i \in\left\{N_{0}: i \neq j\right\}
-\\
-&t_{k}^{\prime} \geq t_{j}^{\prime}+\tau_{j k}^{\prime}+s_{R}-M\left(1-\sum_{i \in N_{0} \atop\langle i, j, k \in P} y_{i j k}\right) \quad    
-\\
-&\hspace{2cm}\forall j \in C^{\prime}, k \in\left\{N_{+}: k \neq j\right\}
-\\
-&t_{k}^{\prime}-\left(t_{j}^{\prime}-\tau_{i j}^{\prime}\right) \leq e+M\left(1-y_{i j k}\right) \quad   
-\\
-&\hspace{2cm}\forall k \in N_{+}, j \in\{C: j \neq k\}, i \in\left\{N_{0}:\langle i, j, k\rangle \in P\right\}
-\\
-&u_{i}-u_{j} \geq 1-(c+2) p_{i j} \forall i \in C, j \in\{C: j \neq i\} 
-\\ 
-&u_{i}-u_{j} \leq-1+(c+2)\left(1-p_{i j}\right) \forall i \in C, j \in\{C: j \neq i\}
- \\ 
-&p_{i j}+p_{j i}=1 \quad \forall i \in C, j \in\{C: j \neq i\}
-\\
-&t_{l}^{\prime} \geq t_{k}^{\prime}-M(3-\sum_{j \in C} y_{i j k}-\sum_{m \in C} \sum_{n \in N_{+} \atop\{i j, k \in P} y_{l m n}-p_{i l}    
-\\
-&\hspace{2cm} \forall i \in N_{0}, k \in\left\{N_{+}: k \neq i\right\}, l \in\{C: l \neq i, l \neq k\}
-\\
-&t_{0}=0 ,  
-\\
-&t_{0}^{\prime}=0 ,  
-\\ 
-&p_{0 j}=1,   \quad \forall j \in C 
-\\ 
-&x_{i j} \in\{0,1\},   \quad \forall i \in N_{0}, j \in\left\{N_{+}: j \neq i\right\} 
-\\ 
-&y_{i j k} \in\{0,1\} ,  \quad \forall i \in N_{0}, j \in\{C: j \neq i\}, k \in\left\{N_{+}:\langle i, j, k\rangle \in P\right\} 
-\\ 
-&1 \leq u_{i} \leq c+2,   \quad \forall i \in N_{+}
-\\
-&t_{i} \geq 0,   \quad \forall i \in N \\ &t_{i}^{\prime} \geq 0 \quad \forall i \in N 
-\\ 
-&p_{i j} \in\{0,1\},   \quad \forall i \in N_{0}, j \in\{C: j \neq i\}		
-\end{aligned}
-$$
 
 ## Quick start 
 > `Data`类：存储算例数据
