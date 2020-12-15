@@ -14,17 +14,7 @@
 
 
 ## Model
-$$
-\min  \sum_{\left( i,j \right) \in A}{c_{ij}x_{ij}}
-\\
-\sum_{\left( j,i \right) \in A}{x_{ij}}-\sum_{\left( i,j \right) \in A}{x_{ji}}=b_i,\forall i\in V,
-\\
-b_i=\begin{cases}
-	-1,  if\,\,i=s,\\
-	0,   if\,\,i\ne s\,\,and\,\,i\ne t,\\
-	1,   if\,\,i=t,\\
-\end{cases}
-$$
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201215215413281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phb3d1eWluZ3NodQ==,size_16,color_FFFFFF,t_70)
 
 
 
