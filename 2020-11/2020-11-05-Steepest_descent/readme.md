@@ -1,38 +1,42 @@
 
 @[TOC]
 
-# PythonÊµÏÖ×îËÙÏÂ½µ·¨(The steepest descent method)ÏêÏ¸°¸Àı
+# Pythonå®ç°æœ€é€Ÿä¸‹é™æ³•(The steepest descent method)è¯¦ç»†æ¡ˆä¾‹
 
-> Ô­²©¿ÍÁ´½Ó [https://blog.csdn.net/HsinglukLiu/article/details/109524062](https://blog.csdn.net/HsinglukLiu/article/details/109524062)
+ä½œè€…ï¼šåˆ˜å…´ç¦„ï¼Œæ¸…åå¤§å­¦ï¼Œæ¸…åä¼¯å…‹åˆ©æ·±åœ³å­¦é™¢ (åšå£«åœ¨è¯»)
+
+é‚®ç®±ï¼šhsinglul@163.com
+
+> åŸåšå®¢é“¾æ¥ [https://blog.csdn.net/HsinglukLiu/article/details/109524062](https://blog.csdn.net/HsinglukLiu/article/details/109524062)
 
 ## Introduction
 
-> ±¾´úÂëÖ÷ÒªÊÇ½éÉÜPythonÊµÏÖ×îËÙÏÂ½µ·¨(The steepest descent method)¼°ÆäÏêÏ¸°¸Àı
+> æœ¬ä»£ç ä¸»è¦æ˜¯ä»‹ç»Pythonå®ç°æœ€é€Ÿä¸‹é™æ³•(The steepest descent method)åŠå…¶è¯¦ç»†æ¡ˆä¾‹
 
-´úÂëÇó½â½á¹û¿ÉÊÓ»¯Ğ§¹ûÈçÍ¼
+ä»£ç æ±‚è§£ç»“æœå¯è§†åŒ–æ•ˆæœå¦‚å›¾
 
-> ÀıÈç£º
-> ![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201215173134647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+> ä¾‹å¦‚ï¼š
+> ![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201215173134647.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
 
 
 
 ## Algorithm
 
-> ±¾ÎÄÖĞµÄ¿Î¼şÀ´×ÔÇå»ª´óÑ§ÉîÛÚ¹ú¼ÊÑĞ¾¿ÉúÔº£¬ÎïÁ÷Óë½»Í¨Ñ§²¿ÕÅ²ÓÈÙ½ÌÊÚ¡¶¸ß¼¶ÔË³ïÑ§¡·¿Î³Ì¡£
+> æœ¬æ–‡ä¸­çš„è¯¾ä»¶æ¥è‡ªæ¸…åå¤§å­¦æ·±åœ³å›½é™…ç ”ç©¶ç”Ÿé™¢ï¼Œç‰©æµä¸äº¤é€šå­¦éƒ¨å¼ ç¿è£æ•™æˆã€Šé«˜çº§è¿ç­¹å­¦ã€‹è¯¾ç¨‹ã€‚
 > 
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/2020121517324338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/2020121517324338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70)
 
 
 ## Quick start 
-±¾´úÂëÖ÷ÒªÉæ¼°pythonµÄ·ûºÅº¯Êı°ü 	`sympy`£¬¼òÒª½éÉÜÈçÏÂ£¬¾ßÌå½éÉÜ¼û¡¾ÔËĞ¡³ï¡¿¹«ÖÚºÅÍÆÎÄ
+æœ¬ä»£ç ä¸»è¦æ¶‰åŠpythonçš„ç¬¦å·å‡½æ•°åŒ… 	`sympy`ï¼Œç®€è¦ä»‹ç»å¦‚ä¸‹ï¼Œå…·ä½“ä»‹ç»è§ã€è¿å°ç­¹ã€‘å…¬ä¼—å·æ¨æ–‡
 
-`ÓÅ»¯|×îËÙÏÂ½µ·¨£ºÏêÏ¸°¸Àı+PythonÊµÏÖ`
+`ä¼˜åŒ–|æœ€é€Ÿä¸‹é™æ³•ï¼šè¯¦ç»†æ¡ˆä¾‹+Pythonå®ç°`
 
 [https://mp.weixin.qq.com/s/lS5BhxnZcVoS991XTb6MmQ](https://mp.weixin.qq.com/s/lS5BhxnZcVoS991XTb6MmQ)
 
 
-#### ¹¹½¨·ûºÅ±äÁ¿ºÍ·ûºÅº¯Êı
+#### æ„å»ºç¬¦å·å˜é‡å’Œç¬¦å·å‡½æ•°
 ```python
 from sympy import * 
 x_1 = symbols('x_1')
@@ -41,17 +45,17 @@ x_2 = symbols('x_2')
 fun = 2 * x_1 * x_2 + 2 * x_2 - x_1**2 - 2 * x_2**2
 fun  
 ```
-Õâ¸öÊÇÓÃÀ´¹¹ÔìÁ½¸ö·ûºÅ±äÁ¿$x_1, x_2$£¬¾ÍÏñ´úÊıÖĞÓÃ×ÖÄ¸´úÌæ±äÁ¿Ò»Ñù¡£È»ºó¿ÉÒÔ¶¨Òå³öÎÒÃÇµÄº¯Êı
+è¿™ä¸ªæ˜¯ç”¨æ¥æ„é€ ä¸¤ä¸ªç¬¦å·å˜é‡$x_1, x_2$ï¼Œå°±åƒä»£æ•°ä¸­ç”¨å­—æ¯ä»£æ›¿å˜é‡ä¸€æ ·ã€‚ç„¶åå¯ä»¥å®šä¹‰å‡ºæˆ‘ä»¬çš„å‡½æ•°
 $$
 \begin{aligned}
 f(x_1,x_2)=&2x_1x_2 +2x_2-x_1^2-2x_2^2 ,
 \end{aligned}
 $$
 
-`jupyter notebook`ÖĞµÄÏÔÊ¾Ğ§¹ûÊÇÕâÑùµÄ
+`jupyter notebook`ä¸­çš„æ˜¾ç¤ºæ•ˆæœæ˜¯è¿™æ ·çš„
 
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201106024350479.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
-¿ÉÒÔ¿´µ½`jupyter notebook`ÖĞÖ±½Ó¾ÍÏÔÊ¾³öÁËÊıÑ§¹«Ê½¸ñÊ½µÄĞÎÊ½£¬ÕâÊÇÒòÎª`jupyter notebook`ÖĞÄÚÇ¶ÁË`LaTeX`Ïà¹ØÖ§³Ö°üµÄÔµ¹Ê¡£×ÜÖ®ÕâÑù¿ÉÊÓ»¯¾Í·Ç³£²»´í¡£
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201106024350479.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hzaW5nbHVrTGl1,size_16,color_FFFFFF,t_70#pic_center)
+å¯ä»¥çœ‹åˆ°`jupyter notebook`ä¸­ç›´æ¥å°±æ˜¾ç¤ºå‡ºäº†æ•°å­¦å…¬å¼æ ¼å¼çš„å½¢å¼ï¼Œè¿™æ˜¯å› ä¸º`jupyter notebook`ä¸­å†…åµŒäº†`LaTeX`ç›¸å…³æ”¯æŒåŒ…çš„ç¼˜æ•…ã€‚æ€»ä¹‹è¿™æ ·å¯è§†åŒ–å°±éå¸¸ä¸é”™ã€‚
 
 
 ## Dependencies
@@ -65,14 +69,14 @@ $$
 
 
 ## Contact
-Your Name £º ÁõĞËÂ»  hsinglul@163.com
+Your Name ï¼š åˆ˜å…´ç¦„  hsinglul@163.com
 
 My blog:   [https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113](https://blog.csdn.net/HsinglukLiu?spm=1010.2135.3001.5113)
 
 
 ## About us
-ÔËĞ¡³ï¹«ÖÚºÅÊÇÖÂÁ¦ÓÚ·ÖÏíÔË³ïÓÅ»¯(LP¡¢MIP¡¢NLP¡¢Ëæ»ú¹æ»®¡¢Â³°ôÓÅ»¯)¡¢Í¹ÓÅ»¯¡¢Ç¿»¯Ñ§Ï°µÈÑĞ¾¿ÁìÓòµÄÄÚÈİÒÔ¼°Éæ¼°µ½µÄËã·¨µÄ´úÂëÊµÏÖ¡£±à³ÌÓïÑÔºÍ¹¤¾ß°üÀ¨Java¡¢Python¡¢Matlab¡¢CPLEX¡¢Gurobi¡¢SCIP µÈ¡£
+è¿å°ç­¹å…¬ä¼—å·æ˜¯è‡´åŠ›äºåˆ†äº«è¿ç­¹ä¼˜åŒ–(LPã€MIPã€NLPã€éšæœºè§„åˆ’ã€é²æ£’ä¼˜åŒ–)ã€å‡¸ä¼˜åŒ–ã€å¼ºåŒ–å­¦ä¹ ç­‰ç ”ç©¶é¢†åŸŸçš„å†…å®¹ä»¥åŠæ¶‰åŠåˆ°çš„ç®—æ³•çš„ä»£ç å®ç°ã€‚ç¼–ç¨‹è¯­è¨€å’Œå·¥å…·åŒ…æ‹¬Javaã€Pythonã€Matlabã€CPLEXã€Gurobiã€SCIP ç­‰ã€‚
 
 
-**¹Ø×¢ÎÒÃÇ:  ÔË³ïĞ¡¹«ÖÚºÅ**
-![ÔÚÕâÀï²åÈëÍ¼Æ¬ÃèÊö](https://img-blog.csdnimg.cn/20201214000806951.png)
+**å…³æ³¨æˆ‘ä»¬:  è¿ç­¹å°å…¬ä¼—å·**
+![åœ¨è¿™é‡Œæ’å…¥å›¾ç‰‡æè¿°](https://img-blog.csdnimg.cn/20201214000806951.png)
