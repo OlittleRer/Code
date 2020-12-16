@@ -1,0 +1,4 @@
+Amarillo   Teaneck  Chicago  SiouxFalls
+Sunnyvale    250  420  380  280
+Dublin   1280  990   1440   1520
+Bangkok  1550  1420   1660   1730

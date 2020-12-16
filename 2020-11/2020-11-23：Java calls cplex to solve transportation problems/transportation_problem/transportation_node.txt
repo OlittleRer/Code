@@ -1,0 +1,11 @@
+plant               quantity    isSource   id
+Sunnyvale   45 1 0
+Dublin  120 1 1
+Bangkok  95 1 2
+Amarillo  80 0 0
+Teaneck   78  0 1
+Chicago  47 0 2
+SiouxFalls  55 0 3
+ 
+
+ 
